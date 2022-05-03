@@ -1,22 +1,20 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^18.2.0"
-  }
+	"name": "rfnt-q-and-a-app",
+	"version": "1.0.0",
+	"description": "A simple Q&A App",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron ."
+	},
+	"repository": "https://github.com/altRush/q-and-a-app.git",
+	"keywords": [
+		"Electron",
+		"assignment",
+		"demo"
+	],
+	"author": "Waraht Punyarote",
+	"license": "CC0-1.0",
+	"devDependencies": {
+		"electron": "^18.2.0"
+	}
 }
