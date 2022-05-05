@@ -2,9 +2,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
+let mainWindow, answerWindow
+
 function createWindow() {
 	// Create the browser window.
-	const mainWindow = new BrowserWindow({
+	mainWindow = new BrowserWindow({
 		width: 1200,
 		height: 800,
 		webPreferences: {
@@ -40,8 +42,27 @@ app.whenReady().then(() => {
 })
 
 ipcMain.on('asynchronous-message', (event, arg) => {
-	console.log(arg) // prints "ping"
-	event.reply('asynchronous-reply', 'pong')
+	console.log(arg)
+
+	if (!answerWindow) {
+		answerWindow = new BrowserWindow({
+			width: 800,
+			height: 600,
+			parent: mainWindow,
+			webPreferences: {
+				preload: path.join(__dirname, 'preload.js')
+			}
+		})
+
+		answerWindow.loadFile('child.html')
+		answerWindow.webContents.openDevTools()
+	}
+	// console.log(arg) // prints "ping"
+	// event.reply('asynchronous-reply', 'pong')
+
+	if (answerWindow) {
+		answerWindow.webContents.send('action-update-question', arg)
+	}
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

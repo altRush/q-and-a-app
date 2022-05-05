@@ -2,7 +2,7 @@
 
 /* Add styles here to customize the appearance of your app */
 
-#questions > div > a {
+#questions > div {
   font-weight: bold;
   cursor: pointer;
   color:cadetblue;

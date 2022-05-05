@@ -1,7 +1,6 @@
 const createQuestionDOM = questionArray => {
 	const questionDOMArray = questionArray.map(
-		question =>
-			`<div><a href="child.html" target="_blank">${question}</a></div>`
+		question => `<div>${question}</div>`
 	)
 
 	return questionDOMArray.reduce((dom, question) => {

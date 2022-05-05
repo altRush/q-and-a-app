@@ -20,10 +20,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	renderQuestions(questionDOM)
 
-	document.querySelector('#questions').addEventListener('click', () => {
-		ipcRenderer.on('asynchronous-reply', (event, arg) => {
-			console.log(arg) // prints "pong"
+	if (document.querySelector('#questions')) {
+		document.querySelector('#questions').addEventListener('click', e => {
+			ipcRenderer.on('asynchronous-reply', (event, arg) => {
+				console.log(arg) // prints "pong"
+			})
+			ipcRenderer.send('asynchronous-message', e.target.innerText)
 		})
-		ipcRenderer.send('asynchronous-message', 'ping')
-	})
+	}
+
+	if (document.querySelector('#answer')) {
+		ipcRenderer.on('action-update-question', (event, arg) => {
+			console.log(arg)
+			document.querySelector('#answer').innerText = arg
+		})
+	}
 })
