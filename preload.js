@@ -1,3 +1,4 @@
+const { ipcRenderer } = require('electron')
 const { createQuestionDOM, renderQuestions } = require('./utils')
 const questionObject = require('./info/questions.json')
 
@@ -18,4 +19,11 @@ window.addEventListener('DOMContentLoaded', () => {
 	const questionDOM = createQuestionDOM(questionArray)
 
 	renderQuestions(questionDOM)
+
+	document.querySelector('#questions').addEventListener('click', () => {
+		ipcRenderer.on('asynchronous-reply', (event, arg) => {
+			console.log(arg) // prints "pong"
+		})
+		ipcRenderer.send('asynchronous-message', 'ping')
+	})
 })
