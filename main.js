@@ -61,7 +61,9 @@ ipcMain.on('asynchronous-message', (event, arg) => {
 
 	answerWindow.webContents.send('action-update-question', arg)
 
-	console.log(arg)
+	answerWindow.on('close', function () {
+		answerWindow = null
+	})
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
