@@ -28,11 +28,4 @@ window.addEventListener('DOMContentLoaded', () => {
 			ipcRenderer.send('asynchronous-message', e.target.innerText)
 		})
 	}
-
-	if (document.querySelector('#answer')) {
-		ipcRenderer.on('action-update-question', (event, arg) => {
-			console.log(arg)
-			document.querySelector('#answer').innerText = arg
-		})
-	}
 })

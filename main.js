@@ -42,27 +42,26 @@ app.whenReady().then(() => {
 })
 
 ipcMain.on('asynchronous-message', (event, arg) => {
-	console.log(arg)
-
 	if (!answerWindow) {
 		answerWindow = new BrowserWindow({
 			width: 800,
 			height: 600,
 			parent: mainWindow,
 			webPreferences: {
-				preload: path.join(__dirname, 'preload.js')
+				preload: path.join(__dirname, 'answerPreload.js')
 			}
 		})
 
 		answerWindow.loadFile('child.html')
+		console.log('yolo')
 		answerWindow.webContents.openDevTools()
 	}
 	// console.log(arg) // prints "ping"
 	// event.reply('asynchronous-reply', 'pong')
 
-	if (answerWindow) {
-		answerWindow.webContents.send('action-update-question', arg)
-	}
+	answerWindow.webContents.send('action-update-question', arg)
+
+	console.log(arg)
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
