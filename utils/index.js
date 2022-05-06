@@ -14,4 +14,10 @@ const renderQuestions = questionDOM => {
 	if (element) element.innerHTML = questionDOM
 }
 
-module.exports = { createQuestionDOM, renderQuestions }
+const findAnswer = (qnaObject, question) => {
+	return Object.values(qnaObject).filter(
+		entry => entry.question === question
+	)[0]['answer']
+}
+
+module.exports = { createQuestionDOM, renderQuestions, findAnswer }

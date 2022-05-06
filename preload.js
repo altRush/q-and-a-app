@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron')
 const { createQuestionDOM, renderQuestions } = require('./utils')
-const questionObject = require('./info/questions.json')
+const questionObject = require('./info/qna.json')
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
@@ -14,7 +14,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	//   replaceText(`${type}-version`, process.versions[type])
 	// }
 
-	const questionArray = Object.values(questionObject)
+	const questionArray = Object.values(questionObject).map(
+		question => question.question
+	)
 
 	const questionDOM = createQuestionDOM(questionArray)
 

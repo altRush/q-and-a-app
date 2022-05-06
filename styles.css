@@ -2,8 +2,23 @@
 
 /* Add styles here to customize the appearance of your app */
 
+#questions {
+  width: 200px;
+}
+
 #questions > div {
   font-weight: bold;
   cursor: pointer;
   color:cadetblue;
 }
+
+#questions > div:nth-child(odd) {
+  background-color: rgb(219, 229, 238);
+}
+
+#questions > div:nth-child(even) {
+  background-color: aliceblue;
+}
+
+
+

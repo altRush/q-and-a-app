@@ -53,7 +53,6 @@ ipcMain.on('asynchronous-message', (event, arg) => {
 		})
 
 		answerWindow.loadFile('child.html')
-		console.log('yolo')
 		answerWindow.webContents.openDevTools()
 	}
 	// console.log(arg) // prints "ping"
