@@ -2,9 +2,10 @@
 	"name": "rfnt-q-and-a-app",
 	"version": "1.0.0",
 	"description": "A simple Q&A App",
-	"main": "main.js",
+	"main": "./dist/main.js",
 	"scripts": {
-		"start": "electron ."
+		"build": "tsc",
+		"start": "npm run build && electron ."
 	},
 	"repository": "https://github.com/altRush/q-and-a-app.git",
 	"keywords": [
@@ -15,6 +16,7 @@
 	"author": "Waraht Punyarote",
 	"license": "CC0-1.0",
 	"devDependencies": {
-		"electron": "^18.2.0"
+		"electron": "^18.2.0",
+		"typescript": "^4.6.4"
 	}
 }

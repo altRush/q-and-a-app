@@ -2,7 +2,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
-let mainWindow, answerWindow
+let mainWindow: typeof BrowserWindow, answerWindow: typeof BrowserWindow
 
 function createWindow() {
 	// Create the browser window.
@@ -41,7 +41,7 @@ app.whenReady().then(() => {
 	})
 })
 
-ipcMain.on('asynchronous-message', (event, arg) => {
+ipcMain.on('asynchronous-message', (event, arg: string) => {
 	if (!answerWindow) {
 		answerWindow = new BrowserWindow({
 			width: 800,
