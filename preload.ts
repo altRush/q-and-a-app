@@ -1,6 +1,6 @@
-const { ipcRenderer } = require('electron')
-const { createQuestionDOM, renderQuestions } = require('./utils')
-const questionObject = require('./info/qna.json')
+import { ipcRenderer } from 'electron'
+import { createQuestionDOM, renderQuestions } from './utils'
+import questionObject from './info/qna.json'
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
@@ -22,12 +22,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	renderQuestions(questionDOM)
 
-	if (document.querySelector('#questions')) {
-		document.querySelector('#questions').addEventListener('click', e => {
-			ipcRenderer.on('asynchronous-reply', (event, arg) => {
-				console.log(arg) // prints "pong"
-			})
-			ipcRenderer.send('asynchronous-message', e.target.innerText)
+	const questionsElement = document.querySelector('#questions')
+
+	if (questionsElement) {
+		questionsElement.addEventListener('click', e => {
+			const input = e.target as HTMLElement
+			// ipcRenderer.on('asynchronous-reply', (event, arg) => {
+			// 	console.log(arg)
+			// })
+			ipcRenderer.send('asynchronous-message', input.innerText)
 		})
 	}
 })

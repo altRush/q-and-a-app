@@ -1,4 +1,4 @@
-export const createQuestionDOM = (questionArray: []) => {
+export const createQuestionDOM = (questionArray: string[]) => {
 	const questionDOMArray = questionArray.map(
 		question => `<div>${question}</div>`
 	)

@@ -1,8 +1,8 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require('electron')
-const path = require('path')
+import { app, BrowserWindow, ipcMain } from 'electron'
+import path from 'path'
 
-let mainWindow: typeof BrowserWindow, answerWindow: typeof BrowserWindow
+let mainWindow: BrowserWindow, answerWindow: BrowserWindow
 
 function createWindow() {
 	// Create the browser window.
@@ -61,7 +61,7 @@ ipcMain.on('asynchronous-message', (event, arg: string) => {
 	answerWindow.webContents.send('action-update-question', arg)
 
 	answerWindow.on('close', function () {
-		answerWindow = null
+		answerWindow.destroy()
 	})
 })
 
