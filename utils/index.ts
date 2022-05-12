@@ -1,21 +1,21 @@
-export const createQuestionDOM = (questionArray: string[]) => {
-	const questionDOMArray = questionArray.map(
-		question => `<div>${question}</div>`
-	)
+import { qnaArray } from "../types";
 
-	return questionDOMArray.reduce((dom: string, question: string) => {
-		return dom + question
-	})
-}
+export const createQuestionDOM = (questionArray: string[]): string => {
+  const questionDOMArray = questionArray.map(
+    (question) => `<div>${question}</div>`
+  );
 
-export const renderQuestions = (questionDOM: string) => {
-	const element = document.getElementById('questions')
+  return questionDOMArray.reduce((dom: string, question: string) => {
+    return dom + question;
+  });
+};
 
-	if (element) element.innerHTML = questionDOM
-}
+export const renderQuestions = (questionDOM: string): void => {
+  const element = document.getElementById("questions");
 
-export const findAnswer = (qnaObject: object, question: string) => {
-	return Object.values(qnaObject).filter(
-		entry => entry.question === question
-	)[0]['answer']
-}
+  if (element) element.innerHTML = questionDOM;
+};
+
+export const findAnswer = (qnaObject: qnaArray[], question: string): string => {
+  return qnaObject.filter((entry) => entry.question === question)[0]["answer"];
+};

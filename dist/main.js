@@ -56,7 +56,7 @@ electron_1.ipcMain.on('asynchronous-message', (event, arg) => {
     // event.reply('asynchronous-reply', 'pong')
     answerWindow.webContents.send('action-update-question', arg);
     answerWindow.on('close', function () {
-        answerWindow.destroy();
+        answerWindow && answerWindow.destroy();
     });
 });
 // Quit when all windows are closed, except on macOS. There, it's common

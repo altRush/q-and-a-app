@@ -2,7 +2,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'path'
 
-let mainWindow: BrowserWindow, answerWindow: BrowserWindow
+let mainWindow: BrowserWindow | undefined, answerWindow: BrowserWindow | undefined
 
 function createWindow() {
 	// Create the browser window.
@@ -61,7 +61,7 @@ ipcMain.on('asynchronous-message', (event, arg: string) => {
 	answerWindow.webContents.send('action-update-question', arg)
 
 	answerWindow.on('close', function () {
-		answerWindow.destroy()
+		answerWindow && answerWindow.destroy()
 	})
 })
 
