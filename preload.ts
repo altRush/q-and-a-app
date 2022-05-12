@@ -4,7 +4,7 @@ import { qnaRecord } from "./types";
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", (): void => {
   // const replaceText = (selector, text) => {
   //   const element = document.getElementById(selector)
   //   if (element) element.innerText = text
@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const questionsElement = document.querySelector("#questions");
 
   if (questionsElement) {
-    questionsElement.addEventListener("click", (e) => {
+    questionsElement.addEventListener("click", (e): void => {
       const input = e.target as HTMLElement;
       // ipcRenderer.on('asynchronous-reply', (event, arg) => {
       // 	console.log(arg)
