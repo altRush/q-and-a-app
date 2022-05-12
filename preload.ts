@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
-import { createQuestionDOM, renderQuestions } from "./utils";
-import qnaArray from "./info/qna.json";
+import { createQuestionDOM, readSyncQna, renderQuestions } from "./utils";
+import { qnaRecord } from "./types";
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
@@ -14,7 +14,11 @@ window.addEventListener("DOMContentLoaded", () => {
   //   replaceText(`${type}-version`, process.versions[type])
   // }
 
-  const questionArray = qnaArray.map((question) => question.question);
+  const qnaArray = readSyncQna();
+
+  const questionArray = qnaArray.map(
+    (question: qnaRecord) => question.question
+  );
 
   const questionDOM = createQuestionDOM(questionArray);
 

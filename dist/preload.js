@@ -1,11 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const utils_1 = require("./utils");
-const qna_json_1 = __importDefault(require("./info/qna.json"));
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener("DOMContentLoaded", () => {
@@ -16,7 +12,8 @@ window.addEventListener("DOMContentLoaded", () => {
     // for (const type of ['chrome', 'node', 'electron']) {
     //   replaceText(`${type}-version`, process.versions[type])
     // }
-    const questionArray = qna_json_1.default.map((question) => question.question);
+    const qnaArray = (0, utils_1.readSyncQna)();
+    const questionArray = qnaArray.map((question) => question.question);
     const questionDOM = (0, utils_1.createQuestionDOM)(questionArray);
     (0, utils_1.renderQuestions)(questionDOM);
     const questionsElement = document.querySelector("#questions");
