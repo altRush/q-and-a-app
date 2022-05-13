@@ -5,6 +5,8 @@ import path from "path";
 let mainWindow: BrowserWindow | undefined,
   answerWindow: BrowserWindow | undefined;
 
+const ANSWER_WINDOW_TIMEOUT = 3_000;
+
 function createWindow(): void {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -45,7 +47,14 @@ app.whenReady().then((): void => {
 ipcMain.on(
   "asynchronous-message",
   (event: Electron.IpcMainEvent, arg: string): void => {
+    setTimeout((): void => {
+      if (answerWindow) answerWindow.webContents.send("close-answer-window");
+    }, ANSWER_WINDOW_TIMEOUT);
+
+    console.log({ answerWindow });
+
     if (!answerWindow) {
+      console.log("yolo");
       answerWindow = new BrowserWindow({
         width: 800,
         height: 600,
@@ -64,10 +73,22 @@ ipcMain.on(
     answerWindow.webContents.send("action-update-question", arg);
 
     answerWindow.on("close", function (): void {
-      answerWindow && answerWindow.destroy();
+      if (answerWindow) {
+        answerWindow.destroy();
+        answerWindow = undefined;
+      }
     });
   }
 );
+
+ipcMain.handle("close-answer-window", async (event, arg) => {
+  await ((): void => {
+    if (answerWindow) {
+      answerWindow.destroy();
+      answerWindow = undefined;
+    }
+  })();
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

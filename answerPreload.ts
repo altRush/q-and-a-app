@@ -1,4 +1,3 @@
-import fs from "fs";
 import { ipcRenderer } from "electron";
 import { findAnswer, readSyncQna } from "./utils";
 
@@ -10,5 +9,14 @@ ipcRenderer.on(
     const element = document.querySelector<HTMLElement>("#answer");
 
     if (element) element.innerText = findAnswer(readSyncQna(), arg);
+  }
+);
+
+ipcRenderer.on(
+  "close-answer-window",
+  (event: Electron.IpcRendererEvent, arg: string): void => {
+    ipcRenderer.invoke("close-answer-window", arg).then((result) => {
+      console.log(result);
+    });
   }
 );
