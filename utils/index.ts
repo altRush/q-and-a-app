@@ -17,11 +17,8 @@ export const renderQuestions = (questionDOM: string): void => {
   if (element) element.innerHTML = questionDOM;
 };
 
-export const findAnswer = (
-  qnaObject: qnaRecord[],
-  question: string
-): string => {
-  return qnaObject.filter((entry) => entry.question === question)[0]["answer"];
+export const findAnswer = (qnaArray: qnaRecord[], question: string): string => {
+  return qnaArray.filter((entry) => entry.question === question)[0]["answer"];
 };
 
 export const readSyncQna = (): qnaRecord[] => {
