@@ -9,7 +9,5 @@ electron_1.ipcRenderer.on("action-update-question", (event, arg) => {
         element.innerText = (0, utils_1.findAnswer)((0, utils_1.readSyncQna)(), arg);
 });
 electron_1.ipcRenderer.on("close-answer-window", (event, arg) => {
-    electron_1.ipcRenderer.invoke("close-answer-window", arg).then((result) => {
-        console.log(result);
-    });
+    electron_1.ipcRenderer.invoke("close-answer-window", arg);
 });

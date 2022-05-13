@@ -54,9 +54,7 @@ electron_1.ipcMain.on("asynchronous-message", (event, arg) => {
         if (answerWindow)
             answerWindow.webContents.send("close-answer-window");
     }, ANSWER_WINDOW_TIMEOUT);
-    console.log({ answerWindow });
     if (!answerWindow) {
-        console.log("yolo");
         answerWindow = new electron_1.BrowserWindow({
             width: 800,
             height: 600,
@@ -79,12 +77,10 @@ electron_1.ipcMain.on("asynchronous-message", (event, arg) => {
     });
 });
 electron_1.ipcMain.handle("close-answer-window", (event, arg) => __awaiter(void 0, void 0, void 0, function* () {
-    yield (() => {
-        if (answerWindow) {
-            answerWindow.destroy();
-            answerWindow = undefined;
-        }
-    })();
+    if (answerWindow) {
+        answerWindow.destroy();
+        answerWindow = undefined;
+    }
 }));
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

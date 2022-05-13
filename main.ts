@@ -51,10 +51,7 @@ ipcMain.on(
       if (answerWindow) answerWindow.webContents.send("close-answer-window");
     }, ANSWER_WINDOW_TIMEOUT);
 
-    console.log({ answerWindow });
-
     if (!answerWindow) {
-      console.log("yolo");
       answerWindow = new BrowserWindow({
         width: 800,
         height: 600,
@@ -81,14 +78,15 @@ ipcMain.on(
   }
 );
 
-ipcMain.handle("close-answer-window", async (event, arg) => {
-  await ((): void => {
+ipcMain.handle(
+  "close-answer-window",
+  async (event: Electron.IpcMainInvokeEvent, arg: string) => {
     if (answerWindow) {
       answerWindow.destroy();
       answerWindow = undefined;
     }
-  })();
-});
+  }
+);
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

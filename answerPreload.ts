@@ -15,8 +15,6 @@ ipcRenderer.on(
 ipcRenderer.on(
   "close-answer-window",
   (event: Electron.IpcRendererEvent, arg: string): void => {
-    ipcRenderer.invoke("close-answer-window", arg).then((result) => {
-      console.log(result);
-    });
+    ipcRenderer.invoke("close-answer-window", arg);
   }
 );
